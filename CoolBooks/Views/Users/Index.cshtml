@@ -1,0 +1,25 @@
+﻿@model IEnumerable<CoolBooks.Models.Users>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Users</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DisplayName)
+        </th>                        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>        
+        <td>
+            @Html.DisplayFor(modelItem => item.DisplayName)
+        </td>                
+    </tr>
+}
+
+</table>

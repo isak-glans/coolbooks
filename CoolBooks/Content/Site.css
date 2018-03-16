@@ -1,0 +1,141 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #2a8e2e;
+}
+    .navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
+        color: #39bb3e;
+    }
+    
+    #randomBook {
+        width: 100%;
+        background-color: cadetblue;
+        margin-bottom: 20px;
+        padding: 10px 0;
+        margin-top: 10px;
+        position: relative;
+        overflow: hidden;
+    }
+    #randomBook img {
+        display: block;
+        margin: 0 auto;
+        transition: all 10s ease-in-out;
+        z-index: 100;
+    }
+        #randomBook img:hover {
+            -webkit-filter: brightness(115%); /* Safari */
+            filter: brightness(115%);
+            transform: scale(5.00);
+            z-index: 500;
+        }
+
+.home-book {
+    
+    margin-bottom: 20px;
+    transition: all 0.5s ease-in-out;
+}
+    .home-book a>div {
+        height: 300px;
+        width: 200px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        -webkit-box-shadow: 6px 7px 5px -2px rgba(0,0,0,0.75);
+        -moz-box-shadow: 6px 7px 5px -2px rgba(0,0,0,0.75);
+        box-shadow: 6px 7px 5px -2px rgba(0,0,0,0.75);
+    }
+    .home-book:hover {
+        -webkit-filter: brightness(115%); /* Safari */
+        filter: brightness(115%);        
+        transform: scale(1.05);
+    }
+
+@media screen and (max-width: 480px) {
+    .home-book img {
+        max-width: 100px;
+    }
+}
+
+#booksIndexSearch {
+    margin-bottom:20px;
+}
+    #booksIndexSearch .row input[type="submit"] {
+        margin-top: 18px;
+    }
+
+
+span.stars, span.stars span {
+    display: block;
+    background: url(images/stars.png) 0 -16px repeat-x;
+    width: 80px;
+    height: 16px;
+}
+
+    span.stars span {
+        background-position: 0 0;        
+    }
+
+#booksUserReviews {
+    padding: 10px;
+    max-width: 650px;
+}
+    #booksUserReviews .content {
+        background-color: #f3f3f3;
+        padding: 10px 10px 30px 10px;
+    }
+    #booksUserReviews .options {
+        text-align: right;
+        padding: 10px;
+    }
+    #booksUserReviews .title {
+        font-weight: bold;
+        margin-top: 5px;
+    }
+#booksUserReviews .author {
+
+}
+.bookUserReview .date {
+    /*margin-top: 15px;    
+    font-style: italic;
+    text-align: right;*/
+}
+
+pages_holder {
+    display:inline-block;
+    margin-right : 5px;
+}
+#reviewsFilter {
+    margin: 10px 0;
+}
+#reviewsFilter input[type = "submit"] {
+    margin-top: 18px;
+}
+
+.book_medium {
+    height: 300px;
+    width: 200px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

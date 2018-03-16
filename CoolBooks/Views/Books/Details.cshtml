@@ -1,0 +1,159 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model CoolBooks.Models.DetailsBooksViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Books</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Title
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book.Title)
+        </dd>
+
+        <dt>
+            Description
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book.Description)
+        </dd>
+
+        <dt>
+            Genre
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book.Genres.Name)
+        </dd>
+
+        <dt>
+            Author
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book.Authors.FirstName)
+            @Html.DisplayFor(model => model.Book.Authors.LastName)
+        </dd>
+
+        <dt>
+            Created
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book.Created)
+        </dd>
+
+        <dt>
+            ISBN
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book.ISBN)
+        </dd>        
+
+        <dt>
+            Average Rating
+        </dt>
+
+        @if (Model.Book.AvgRating.HasValue)
+        {
+            <dd>
+                <span class="stars" title="@Math.Round((double)Model.Book.AvgRating, 2)">
+                    <span class="stars" style="width:@((int)Math.Round((double)Model.Book.AvgRating * 16))px;"></span>
+                </span>
+            </dd>
+        }
+        else
+        {
+            <dd>N/A</dd>
+        }
+
+        <dt>
+            Image
+        </dt>
+
+        <dd>
+            <img src="~/Content/book_covers/@Html.DisplayFor(model => model.Book.ImagePath)"/>
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Book.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<h3>Reviews</h3>
+<div id="booksUserReviews">
+    @if (Model.UserReviews.Count == 0)
+    {
+        <p>There are no reviews for this book yet.</p>
+    }
+
+    @foreach (var item in Model.ReviewMenu)
+    {
+        <div class="bookUserReview">
+
+            @if (item.Rating.HasValue)
+            {
+                <div >                    
+                    <span class="stars" title="@item.Rating">
+                        <span class="stars" style="width:@(item.Rating * 16)px;"></span>
+                    </span>
+                </div>
+            }
+            else
+            {
+                <div>
+                    Rating: N/A
+                </div>
+            }
+
+            <div class="title">               
+                @Html.DisplayFor(r => item.Title)
+            </div>
+
+            <div class="row">
+                <div class="date col-sm-6 col-md-4">Created: @item.Created.ToString("yyyy-MM-dd")</div>
+                <div class="author col-sm-6 col-md-4">
+                    Author:
+                    @Html.ActionLink(item.AspNetUsers.Users.DisplayName, "Details", "Users", routeValues: new { id = (string)item.AspNetUsers.Users.UserId }, htmlAttributes: new { title = "User" })
+                </div>                
+            </div>
+
+            <div class="content">
+                @Html.DisplayFor(r => item.Text)<text><br/></text>                
+            </div>
+
+            <div class="options">
+                @{if (Model.UserId == item.AspNetUsers.Id || Model.UserIsAdmin)
+                    {
+                        <a href="@Url.Action("Edit", "Reviews", new { id = item.Id })" class="btn btn-default"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                        <a href="@Url.Action("Delete", "Reviews", new { id = item.Id })" class="btn btn-default"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                    }
+                }                
+            </div>
+        </div>
+                    }
+</div>
+
+@Html.PagedListPager((IPagedList)Model.ReviewMenu, page => Url.Action("Details", new { page }))
+
+
+@if (Model.UserSignedIn)
+{
+    Html.RenderPartial("~/Views/Reviews/Create.cshtml", Model.NewBookReivew);
+}
+
+  

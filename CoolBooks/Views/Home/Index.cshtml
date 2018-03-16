@@ -1,0 +1,34 @@
+﻿@model CoolBooks.Models.HomeBookViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div id="randomBook">
+        @{
+            var rndBook = Model.RandomBook;
+        }
+        <a href="~/Books/Details/@rndBook.Id"><img src="~/Content/book_covers/@rndBook.ImagePath" alt="bild" /></a>
+                
+</div>
+
+@{
+    var theBooks = Model.LatestBooks;
+}
+<div class="bookPreivew">
+    <div class="row">
+        @foreach (var item in theBooks)
+        {
+            <div class="col-sm-6 col-md-3 col-xs-6 home-book">                
+                @*<a href="~/Books/Details/@item.Id"><img src="~/Content/book_covers/@Html.DisplayFor(modelItem => item.ImagePath)" /></a>*@ 
+                @{var imgPathB = "../../Content/book_covers/" + item.ImagePath; }                
+                <a href="~/Books/Details/@item.Id">                    
+                    <div style="background-image:url(@imgPathB)"></div>
+                </a>
+            </div>
+            @*var imgPath = "Content/book_covers/" + @Html.DisplayFor(modelItem => item.ImagePath);
+            <div style="background-image:url(@imgPath)" class="col-sm-6 col-md-3 col-xs-6 book_medium"></div>*@
+        }
+     
+    </div>
+</div>
+
